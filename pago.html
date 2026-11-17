@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago seguro | CréditoYa</title>
+  <meta name="theme-color" content="#533d93">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/icono.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Kulim+Park:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pago-body">
+
+  <header class="pago-header">
+    <div class="contenedor">
+      <a href="index.html" class="marca"><img src="assets/icono.png" alt=""><span class="marca-texto">Crédito<span>Ya</span></span></a>
+      <span class="seguro-top">🔒 Pago seguro<span class="extra"> · SSL 256 bits</span></span>
+    </div>
+  </header>
+
+  <div class="contenedor">
+    <div class="progreso" aria-label="Progreso de compra">
+      <div class="hecho"><b>✓</b><span>Plan</span></div>
+      <i class="sep"></i>
+      <div class="actual"><b>2</b><span>Pago</span></div>
+      <i class="sep"></i>
+      <div><b>3</b><span>Confirmación</span></div>
+    </div>
+
+    <div class="pago-grid">
+      <!-- ======== Formulario ======== -->
+      <div class="panel">
+        <h2>Completa tu pago</h2>
+        <p class="desc">Activa tu Plan Impulso y accede a tu línea de crédito en minutos.</p>
+
+        <div class="metodos" role="tablist">
+          <button type="button" class="metodo activo" data-metodo="tarjeta" role="tab"><span>💳</span>Tarjeta</button>
+          <button type="button" class="metodo" data-metodo="transfer" role="tab"><span>⚡</span>Transfer365</button>
+          <button type="button" class="metodo" data-metodo="paypal" role="tab"><span>🅿️</span>PayPal</button>
+        </div>
+
+        <!-- Tarjeta -->
+        <form id="formTarjeta" novalidate>
+          <p style="font-size:.85rem;color:var(--texto-suave);margin-bottom:.5rem">Aceptamos:</p>
+          <div class="marcas todas" id="marcas">
+            <span class="marca-tj tj-visa" data-marca="visa">VISA</span>
+            <span class="marca-tj tj-master" data-marca="mastercard">Mastercard</span>
+            <span class="marca-tj tj-amex" data-marca="amex">AMEX</span>
+            <span class="marca-tj tj-discover" data-marca="discover">Discover</span>
+            <span class="marca-tj tj-diners" data-marca="diners">Diners</span>
+            <span class="marca-tj tj-jcb" data-marca="jcb">JCB</span>
+          </div>
+
+          <div class="tarjeta-visual" id="tarjetaVisual" aria-hidden="true">
+            <div class="tv-top"><div class="chip"></div><div class="tv-marca" id="tvMarca">CréditoYa</div></div>
+            <div class="tv-num" id="tvNum">•••• •••• •••• ••••</div>
+            <div class="tv-bottom">
+              <div><small>Titular</small><span id="tvNombre">NOMBRE APELLIDO</span></div>
+              <div><small>Vence</small><span id="tvVence">MM/AA</span></div>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+            <div class="msg">Ingresa un correo válido.</div>
+          </div>
+          <div class="campo">
+            <label for="numero">Número de tarjeta</label>
+            <div class="con-icono">
+              <input type="text" id="numero" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number" maxlength="23" required>
+              <span class="ico-in" id="icoMarca"></span>
+            </div>
+            <div class="msg">Número de tarjeta inválido.</div>
+          </div>
+          <div class="campo">
+            <label for="nombre">Nombre como aparece en la tarjeta</label>
+            <input type="text" id="nombre" placeholder="María López" autocomplete="cc-name" required>
+            <div class="msg">Ingresa el nombre del titular.</div>
+          </div>
+          <div class="fila-2">
+            <div class="campo">
+              <label for="vence">Vencimiento</label>
+              <input type="text" id="vence" inputmode="numeric" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp" required>
+              <div class="msg">Fecha inválida o vencida.</div>
+            </div>
+            <div class="campo">
+              <label for="cvv">CVV <span title="3 dígitos al reverso (4 al frente en AMEX)" style="cursor:help">ⓘ</span></label>
+              <input type="password" id="cvv" inputmode="numeric" placeholder="•••" maxlength="4" autocomplete="cc-csc" required>
+              <div class="msg">CVV inválido.</div>
+            </div>
+          </div>
+          <div class="fila-2">
+            <div class="campo">
+              <label for="dui">DUI</label>
+              <input type="text" id="dui" inputmode="numeric" placeholder="00000000-0" maxlength="10" required>
+              <div class="msg">Formato: 00000000-0</div>
+            </div>
+            <div class="campo">
+              <label for="depto">Departamento</label>
+              <select id="depto" required>
+                <option value="">Selecciona…</option>
+                <option>San Salvador</option><option>San Miguel</option><option>Santa Ana</option>
+                <option>La Libertad</option><option>Usulután</option><option>Sonsonate</option>
+                <option>La Unión</option><option>La Paz</option><option>Chalatenango</option>
+                <option>Cuscatlán</option><option>Ahuachapán</option><option>Morazán</option>
+                <option>San Vicente</option><option>Cabañas</option>
+              </select>
+              <div class="msg">Selecciona tu departamento.</div>
+            </div>
+          </div>
+          <label class="casilla"><input type="checkbox" id="terminos" required> <span>Acepto los términos y condiciones y la política de privacidad de CréditoYa.</span></label>
+          <button type="submit" class="btn btn-naranja btn-pagar" id="btnPagar">🔒 Pagar <span id="btnMonto">$5.64</span></button>
+        </form>
+
+        <!-- Transfer365 -->
+        <div id="panelTransfer" class="alt-pago oculto">
+          <div class="grande-ico">⚡</div>
+          <h3>Paga con Transfer365</h3>
+          <p>Desde la app de tu banco, transfiere el monto exacto a:</p>
+          <div class="datos-banco">
+            <div><span>Beneficiario</span><b>CréditoYa S.A. de C.V.</b></div>
+            <div><span>Cuenta</span><b>0000-0000-0000</b></div>
+            <div><span>Concepto</span><b id="conceptoRef">IMPULSO-000000</b></div>
+            <div><span>Monto</span><b class="montoAlt">$5.64</b></div>
+          </div>
+          <button type="button" class="btn btn-naranja btn-pagar" data-confirmar>Ya realicé la transferencia</button>
+        </div>
+
+        <!-- PayPal -->
+        <div id="panelPaypal" class="alt-pago oculto">
+          <div class="grande-ico">🅿️</div>
+          <h3>Paga con PayPal</h3>
+          <p>Serás redirigido a PayPal para completar el pago de <b class="montoAlt">$5.64</b> de forma segura.</p>
+          <br>
+          <button type="button" class="btn btn-morado btn-pagar" data-confirmar>Continuar con PayPal</button>
+        </div>
+      </div>
+
+      <!-- ======== Resumen ======== -->
+      <aside class="panel resumen">
+        <h3>Resumen de tu pedido</h3>
+        <div class="plan-box">
+          <img src="assets/icono.png" alt="">
+          <div><strong>Plan Impulso</strong><small>Línea preaprobada hasta $1,500 · sin fiador</small></div>
+        </div>
+
+        <div class="campo">
+          <label for="ciclo">Facturación</label>
+          <select id="ciclo">
+            <option value="mensual">Mensual — $4.99/mes</option>
+            <option value="anual">Anual — $47.88/año (ahorra 20%)</option>
+          </select>
+        </div>
+
+        <div class="linea"><span>Valor regular</span><s id="rValor">$55.00</s></div>
+        <div class="linea"><span>Plan Impulso</span><span id="rSub">$4.99</span></div>
+        <div class="linea desc-l oculto" id="rDescLinea"><span>Cupón IMPULSO (-20%)</span><span id="rDesc">-$1.00</span></div>
+        <div class="linea"><span>IVA (13%)</span><span id="rIva">$0.65</span></div>
+        <div class="linea total"><span>Total hoy</span><span id="rTotal">$5.64</span></div>
+
+        <div class="cupon">
+          <input type="text" id="cupon" placeholder="Código de cupón" aria-label="Código de cupón">
+          <button type="button" id="aplicarCupon">Aplicar</button>
+        </div>
+        <div class="cupon-msg" id="cuponMsg"></div>
+
+        <div class="garantia-box">
+          <span style="font-size:1.5rem">🛡️</span>
+          <div><strong>Garantía de 30 días.</strong> Si no te convence, te devolvemos el 100% de tu dinero. Cancela cuando quieras desde la app.</div>
+        </div>
+
+        <div class="sellos">
+          <div class="sello-c"><b>🔒</b>Cifrado SSL 256-bit</div>
+          <div class="sello-c"><b>🛡️</b>Cumple PCI DSS</div>
+          <div class="sello-c"><b>✔️</b>Verificación 3-D Secure</div>
+          <div class="sello-c"><b>🏦</b>Red Transfer365</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <p class="aviso-demo">Página de demostración académica (Universidad Gerardo Barrios). No se procesan pagos reales ni se envían datos. Para probar usa la tarjeta 4242 4242 4242 4242.</p>
+
+  <!-- Modal de confirmación -->
+  <div class="modal oculto" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="modal-caja">
+      <div class="ok">✓</div>
+      <h2 id="modalTitulo">¡Bienvenido a CréditoYa!</h2>
+      <p>Tu Plan Impulso está activo. Te enviamos la confirmación a tu correo y ya puedes solicitar tu primer crédito.</p>
+      <div class="ref">Referencia: <b id="refPago">CY-000000</b></div>
+      <a href="index.html" class="btn btn-naranja">Volver al inicio</a>
+    </div>
+  </div>
+
+  <script src="js/pago.js"></script>
+</body>
+</html>
