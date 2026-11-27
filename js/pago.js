@@ -113,16 +113,39 @@
     e.target.value = v;
     limpiarError(e.target);
   });
-  ['email', 'depto'].forEach(id => $(id).addEventListener('input', e => limpiarError(e.target)));
+  ['email', 'nombreCuenta', 'passwordCuenta', 'passwordConfirmar', 'depto'].forEach(id => {
+    $(id).addEventListener('input', e => {
+      limpiarError(e.target);
+      $('cuentaMsg').textContent = '';
+      $('cuentaMsg').classList.remove('error-texto');
+    });
+  });
 
   // ---------- Validación ----------
   function marcarError(el, mal) { el.closest('.campo').classList.toggle('error', mal); return !mal; }
   function limpiarError(el) { const c = el.closest('.campo'); if (c) c.classList.remove('error'); }
 
-  function validar() {
+  function validarCuenta() {
     let ok = true;
     const email = $('email').value.trim();
     ok = marcarError($('email'), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) && ok;
+    ok = marcarError($('nombreCuenta'), $('nombreCuenta').value.trim().length < 3) && ok;
+    ok = marcarError($('passwordCuenta'), $('passwordCuenta').value.length < 8) && ok;
+    ok = marcarError($('passwordConfirmar'), $('passwordConfirmar').value !== $('passwordCuenta').value || !$('passwordConfirmar').value) && ok;
+    ok = marcarError($('dui'), !/^\d{8}-\d$/.test($('dui').value)) && ok;
+    ok = marcarError($('depto'), !$('depto').value) && ok;
+
+    if (!$('terminos').checked) {
+      ok = false;
+      $('terminos').parentElement.style.color = 'var(--rojo)';
+    } else {
+      $('terminos').parentElement.style.color = '';
+    }
+    return ok;
+  }
+
+  function validar() {
+    let ok = validarCuenta();
 
     const num = numero.value.replace(/\D/g, '');
     const marca = detectar(num);
@@ -138,26 +161,56 @@
     const cvvLargo = marca ? marca.cvv : 3;
     ok = marcarError($('cvv'), $('cvv').value.length !== cvvLargo) && ok;
 
-    ok = marcarError($('dui'), !/^\d{8}-\d$/.test($('dui').value)) && ok;
-    ok = marcarError($('depto'), !$('depto').value) && ok;
-
-    if (!$('terminos').checked) { ok = false; $('terminos').parentElement.style.color = 'var(--rojo)'; }
-    else { $('terminos').parentElement.style.color = ''; }
     return ok;
   }
 
   // ---------- Envío simulado ----------
-  function exito() {
-    $('refPago').textContent = 'CY-' + Date.now().toString().slice(-8);
+  function exito(referencia) {
+    $('refPago').textContent = referencia;
     $('modal').classList.remove('oculto');
     document.querySelectorAll('.progreso > div').forEach(d => { d.classList.remove('actual'); d.classList.add('hecho'); d.querySelector('b').textContent = '✓'; });
   }
 
-  function procesar(btn) {
+  async function procesar(btn) {
+    if (!validarCuenta()) {
+      const primero = document.querySelector('.campo.error input, .campo.error select');
+      if (primero) primero.focus();
+      return;
+    }
+    $('cuentaMsg').textContent = '';
     const original = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Procesando pago seguro…';
-    setTimeout(() => { btn.disabled = false; btn.innerHTML = original; exito(); }, 1800);
+    btn.innerHTML = '<span class="spinner"></span> Procesando pago de demostración…';
+    try {
+      await CreditoYaStore.checkCheckoutAccount($('email').value, $('passwordCuenta').value);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      const referencia = 'CY-' + Date.now().toString().slice(-8);
+      const ciclo = $('ciclo').value;
+      const total = Number($('rTotal').textContent.replace('$', ''));
+      const renewsAt = new Date();
+      renewsAt.setMonth(renewsAt.getMonth() + (ciclo === 'anual' ? 12 : 1));
+      await CreditoYaStore.createOrRenewAccount({
+        email: $('email').value,
+        name: $('nombreCuenta').value.trim(),
+        password: $('passwordCuenta').value,
+        subscription: {
+          plan: 'Plan Impulso',
+          status: 'Activa',
+          cycle: ciclo,
+          amount: total,
+          reference: referencia,
+          paidAt: new Date().toISOString(),
+          renewsAt: renewsAt.toISOString()
+        }
+      });
+      exito(referencia);
+    } catch (error) {
+      $('cuentaMsg').textContent = error.message || 'No se pudo completar el pago de demostración. Inténtalo nuevamente.';
+      $('cuentaMsg').classList.add('error-texto');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
   }
 
   $('formTarjeta').addEventListener('submit', e => {
@@ -167,9 +220,9 @@
       if (primero) primero.focus();
       return;
     }
-    procesar($('btnPagar'));
+    void procesar($('btnPagar'));
   });
-  document.querySelectorAll('[data-confirmar]').forEach(b => b.addEventListener('click', () => procesar(b)));
+  document.querySelectorAll('[data-confirmar]').forEach(b => b.addEventListener('click', () => { void procesar(b); }));
 
   $('modal').addEventListener('click', e => { if (e.target.id === 'modal') e.target.classList.add('oculto'); });
 })();

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi cuenta | CréditoYa</title>
+  <meta name="theme-color" content="#533d93">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/icono.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Kulim+Park:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="cuenta-body">
+  <header class="pago-header">
+    <div class="contenedor">
+      <a href="index.html" class="marca"><img src="assets/icono.png" alt=""><span class="marca-texto">Crédito<span>Ya</span></span></a>
+      <a href="index.html" class="cuenta-salir">Volver al sitio</a>
+    </div>
+  </header>
+
+  <main class="contenedor cuenta-contenedor">
+    <section class="panel login-panel" id="loginPanel">
+      <span class="etiqueta">Tu espacio CréditoYa</span>
+      <h1>Inicia sesión</h1>
+      <p class="desc">Tu cuenta se crea al activar el Plan Impulso desde el pago. No necesitas registrarte por separado.</p>
+      <form id="formLogin" novalidate>
+        <div class="campo">
+          <label for="loginEmail">Correo electrónico</label>
+          <input type="email" id="loginEmail" autocomplete="email" required>
+        </div>
+        <div class="campo">
+          <label for="loginPassword">Contraseña creada al pagar</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <p class="form-aviso" id="loginMsg" role="status" aria-live="polite"></p>
+        <button class="btn btn-naranja btn-pagar" id="btnLogin" type="submit">Entrar a mi cuenta</button>
+      </form>
+      <p class="cuenta-ayuda">¿Aún no tienes cuenta? <a href="pago.html">Activa tu Plan Impulso</a>.</p>
+      <p class="nota-demo-cuenta">Demo académica: las cuentas y solicitudes se guardan en este navegador; no se envían correos ni se procesan transacciones reales.</p>
+    </section>
+
+    <div id="dashboard" class="oculto">
+      <section class="dashboard-bienvenida">
+        <div>
+          <span class="etiqueta">Panel de cliente</span>
+          <h1>Hola, <span id="nombreCliente">Cliente</span></h1>
+          <p>Consulta tu plan, solicita un microcrédito y revisa el estado de tus solicitudes.</p>
+        </div>
+        <button type="button" class="btn btn-borde" id="btnLogout">Cerrar sesión</button>
+      </section>
+
+      <p class="form-aviso aviso-dashboard" id="dashboardMsg" role="status" aria-live="polite"></p>
+
+      <section class="dashboard-grid">
+        <article class="panel resumen-plan">
+          <div class="panel-titulo">
+            <div><span class="etiqueta">Membresía</span><h2>Plan Impulso</h2></div>
+            <span class="estado-pill" id="estadoPlan">Activa</span>
+          </div>
+          <p class="dato-grande" id="planPrecio">$4.99 <small>/ mes</small></p>
+          <p class="texto-suave" id="planDetalle">Línea de crédito de hasta $1,500 · sin fiador.</p>
+          <p class="texto-suave" id="planRenovacion"></p>
+          <button type="button" class="btn btn-borde btn-cancelar" id="btnCancelarPlan">Cancelar membresía</button>
+          <a class="btn btn-naranja oculto" id="btnReactivarPlan" href="pago.html">Reactivar plan</a>
+        </article>
+
+        <article class="panel resumen-plan">
+          <div class="panel-titulo">
+            <div><span class="etiqueta">Tu cartera</span><h2>Créditos activos</h2></div>
+            <span class="estado-pill estado-neutro" id="contadorCreditos">0</span>
+          </div>
+          <p class="dato-grande" id="saldoDeuda">$0.00</p>
+          <p class="texto-suave">Saldo pendiente de créditos aprobados.</p>
+          <p class="dato-secundario">Solicitudes en revisión: <strong id="contadorSolicitudes">0</strong></p>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel solicitud-panel">
+          <span class="etiqueta">Nuevo microcrédito</span>
+          <h2>¿Cuánto necesitas?</h2>
+          <p class="texto-suave">Simula la cuota antes de enviar tu solicitud. Un asesor debe revisar y responder.</p>
+          <form id="formCredito" novalidate>
+            <div class="campo">
+              <label for="montoCredito">Monto: <strong id="montoTexto">$400</strong></label>
+              <input type="range" id="montoCredito" min="50" max="1500" step="50" value="400">
+            </div>
+            <div class="campo">
+              <label for="plazoCredito">Plazo: <strong id="plazoTexto">6 meses</strong></label>
+              <input type="range" id="plazoCredito" min="1" max="12" step="1" value="6">
+            </div>
+            <div class="simulacion-caja">
+              <div><span>Cuota estimada</span><strong id="cuotaCredito">$0.00 / mes</strong></div>
+              <div><span>Total estimado</span><strong id="totalCredito">$0.00</strong></div>
+              <small>Tasa referencial de demostración: 2.5% mensual. La oferta final se confirmaría antes de aceptar.</small>
+            </div>
+            <div class="campo">
+              <label for="motivoCredito">¿Para qué usarás el crédito?</label>
+              <select id="motivoCredito" required>
+                <option value="">Selecciona un motivo</option>
+                <option>Capital para mi negocio</option>
+                <option>Compra de herramientas o mercadería</option>
+                <option>Emergencia personal o familiar</option>
+                <option>Educación</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <p class="form-aviso" id="creditoMsg" role="status" aria-live="polite"></p>
+            <button type="submit" class="btn btn-naranja btn-pagar" id="btnSolicitarCredito">Enviar solicitud</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-titulo">
+            <div><span class="etiqueta">Centro de actividad</span><h2>Notificaciones</h2></div>
+            <button type="button" class="enlace-boton" id="btnLeerAvisos">Marcar leídas</button>
+          </div>
+          <div class="lista-actividad" id="listaNotificaciones"></div>
+        </article>
+      </section>
+
+      <section class="panel tabla-panel">
+        <span class="etiqueta">Seguimiento</span>
+        <h2>Solicitudes y cartera</h2>
+        <div class="tabla-scroll">
+          <table>
+            <thead><tr><th>Referencia</th><th>Fecha</th><th>Monto</th><th>Plazo</th><th>Estado</th><th>Saldo</th></tr></thead>
+            <tbody id="tablaCreditos"></tbody>
+          </table>
+        </div>
+        <p class="texto-suave vacio-tabla oculto" id="sinCreditos">Aún no tienes solicitudes. Cuando envíes una, podrás seguir su estado aquí.</p>
+      </section>
+
+      <section class="soporte-box">
+        <div><span class="etiqueta">Atención al cliente</span><h2>¿Necesitas ayuda?</h2><p>Revisa las notificaciones de tu cuenta o contáctanos por los canales de atención indicados en el sitio.</p></div>
+        <a href="index.html#faq" class="btn btn-borde">Ver preguntas frecuentes</a>
+      </section>
+      <p class="nota-demo-cuenta">Prototipo educativo: las solicitudes quedan “En revisión” y no son evaluadas ni desembolsadas automáticamente. Los datos se guardan solo en este navegador.</p>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/cuenta.js"></script>
+</body>
+</html>

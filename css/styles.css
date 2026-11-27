@@ -434,6 +434,64 @@ section { padding: 90px 0; }
 .spinner { width: 18px; height: 18px; border: 3px solid rgba(255, 255, 255, .4); border-top-color: #fff; border-radius: 50%; animation: girar .8s linear infinite; }
 @keyframes girar { to { transform: rotate(360deg); } }
 
+/* ---------- Cuenta y gestión de créditos (MVP) ---------- */
+.cuenta-body { background: #f4f0fa; min-height: 100vh; }
+.cuenta-contenedor { padding-top: 3rem; padding-bottom: 4rem; }
+.cuenta-header .contenedor { min-height: 70px; }
+.cuenta-salir { color: var(--morado); font-weight: 700; text-decoration: none; }
+.login-panel { max-width: 520px; margin: 0 auto; padding: 2.5rem; }
+.login-panel h1, .dashboard-bienvenida h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+.login-panel .desc { margin-bottom: 1.5rem; }
+.cuenta-ayuda { color: var(--texto-suave); margin-top: 1rem; text-align: center; }
+.cuenta-ayuda a { color: var(--morado); font-weight: 700; }
+.nota-demo-cuenta { max-width: 760px; margin: 1.5rem auto 0; color: var(--texto-suave); font-size: .85rem; text-align: center; }
+.form-aviso { min-height: 1.3rem; margin: .25rem 0 .8rem; color: var(--texto-suave); font-size: .9rem; }
+.form-aviso.error-texto { color: var(--rojo); }
+.form-aviso.exito-texto { color: var(--verde); }
+.dashboard-bienvenida { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.dashboard-bienvenida p, .texto-suave { color: var(--texto-suave); }
+.aviso-dashboard { margin-bottom: 1rem; }
+.dashboard-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; margin-bottom: 1.4rem; align-items: start; }
+.dashboard-grid > * { min-width: 0; }
+.dashboard-grid .panel, .tabla-panel { padding: 1.7rem; }
+.panel-titulo { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.panel-titulo h2, .solicitud-panel h2, .tabla-panel h2, .soporte-box h2 { font-size: 1.45rem; margin-bottom: .5rem; }
+.estado-pill { display: inline-flex; align-items: center; border-radius: 999px; padding: .3rem .75rem; background: #e7f7ef; color: var(--verde); font-size: .83rem; font-weight: 700; white-space: nowrap; }
+.estado-pill.estado-neutro { background: #f1eef7; color: var(--morado); }
+.estado-pill.estado-cancelado { background: #fde8e8; color: var(--rojo); }
+.dato-grande { color: var(--morado); font-size: 2rem; font-weight: 700; margin: .7rem 0; }
+.dato-grande small { font-size: .95rem; color: var(--texto-suave); font-weight: 600; }
+.dato-secundario { margin-top: .9rem; color: var(--texto-suave); }
+.btn-cancelar { margin-top: 1.1rem; padding: .65rem 1rem; font-size: .9rem; }
+.resumen-plan .btn-naranja { margin-top: 1.1rem; padding: .65rem 1rem; font-size: .9rem; }
+.solicitud-panel > .texto-suave { margin-bottom: 1.3rem; }
+.solicitud-panel input[type=range] { width: 100%; accent-color: var(--naranja); }
+.simulacion-caja { display: grid; gap: .55rem; background: #f6f3fc; border-radius: 14px; padding: 1rem; margin: .4rem 0 1.2rem; }
+.simulacion-caja div { display: flex; justify-content: space-between; gap: 1rem; }
+.simulacion-caja span { color: var(--texto-suave); }
+.simulacion-caja strong { color: var(--morado); text-align: right; }
+.simulacion-caja small { color: var(--texto-suave); font-size: .78rem; }
+.lista-actividad { display: grid; gap: .7rem; max-height: 440px; overflow: auto; }
+.actividad-item { border-left: 3px solid #d5cde6; padding: .65rem .8rem; background: #faf9fc; border-radius: 0 10px 10px 0; }
+.actividad-item.sin-leer { border-color: var(--naranja); background: #fff8f0; }
+.actividad-item strong { color: var(--morado); }
+.actividad-item p { color: var(--texto-suave); font-size: .9rem; margin: .15rem 0; }
+.actividad-item small, .actividad-vacia { color: var(--texto-suave); font-size: .8rem; }
+.enlace-boton { border: 0; background: none; color: var(--morado); text-decoration: underline; font-weight: 700; font-size: .85rem; }
+.tabla-panel { margin-bottom: 1.4rem; }
+.tabla-scroll { overflow-x: auto; }
+.tabla-panel table { width: 100%; border-collapse: collapse; margin-top: 1rem; text-align: left; }
+.tabla-panel th, .tabla-panel td { padding: .75rem .6rem; border-bottom: 1px solid #eee9f4; white-space: nowrap; }
+.tabla-panel th { color: var(--texto-suave); font-size: .82rem; }
+.tabla-panel td { font-size: .9rem; }
+.estado-tabla { color: var(--verde); font-weight: 700; }
+.estado-tabla.pendiente { color: var(--naranja-osc); }
+.vacio-tabla { text-align: center; padding: 1.5rem; }
+.soporte-box { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.5rem; border-radius: var(--radio); background: #fff; box-shadow: var(--sombra); }
+.soporte-box p { color: var(--texto-suave); }
+.datos-cuenta-pago { background: #f8f6fb; border: 1px solid #ebe5f3; border-radius: 16px; padding: 1.2rem; margin-bottom: 1rem; }
+.datos-cuenta-pago > p:not(.form-aviso):not(.cuenta-ayuda) { color: var(--texto-suave); font-size: .9rem; margin-bottom: 1rem; }
+
 /* ==========================================================
    Responsive
    ========================================================== */
@@ -476,6 +534,10 @@ section { padding: 90px 0; }
   .progreso .actual span { display: inline; }
   .marca-texto { font-size: 1.25rem; }
   .seguro-top .extra { display: none; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .dashboard-bienvenida, .soporte-box { align-items: flex-start; flex-direction: column; }
+  .cuenta-contenedor { padding-top: 1.5rem; }
+  .login-panel { padding: 1.5rem; }
 }
 @media (max-width: 420px) {
   .fila-2 { grid-template-columns: 1fr; }

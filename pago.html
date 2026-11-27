@@ -17,7 +17,7 @@
   <header class="pago-header">
     <div class="contenedor">
       <a href="index.html" class="marca"><img src="assets/icono.png" alt=""><span class="marca-texto">Crédito<span>Ya</span></span></a>
-      <span class="seguro-top">🔒 Pago seguro<span class="extra"> · SSL 256 bits</span></span>
+      <span class="seguro-top">🧪 Pago de demostración</span>
     </div>
   </header>
 
@@ -34,7 +34,57 @@
       <!-- ======== Formulario ======== -->
       <div class="panel">
         <h2>Completa tu pago</h2>
-        <p class="desc">Activa tu Plan Impulso y accede a tu línea de crédito en minutos.</p>
+        <p class="desc">Activa tu Plan Impulso y accede a tu línea de crédito en minutos. Tu cuenta se crea al pagar.</p>
+
+        <div class="datos-cuenta-pago">
+          <span class="etiqueta">Datos de tu cuenta</span>
+          <p>Usarás este correo y contraseña para iniciar sesión. No hay un registro separado.</p>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+            <div class="msg">Ingresa un correo válido.</div>
+          </div>
+          <div class="campo">
+            <label for="nombreCuenta">Nombre completo</label>
+            <input type="text" id="nombreCuenta" placeholder="María López" autocomplete="name" required>
+            <div class="msg">Ingresa tu nombre completo.</div>
+          </div>
+          <div class="fila-2">
+            <div class="campo">
+              <label for="passwordCuenta">Crea una contraseña</label>
+              <input type="password" id="passwordCuenta" autocomplete="new-password" minlength="8" required>
+              <div class="msg">Usa al menos 8 caracteres.</div>
+            </div>
+            <div class="campo">
+              <label for="passwordConfirmar">Confirma tu contraseña</label>
+              <input type="password" id="passwordConfirmar" autocomplete="new-password" required>
+              <div class="msg">Las contraseñas no coinciden.</div>
+            </div>
+          </div>
+          <div class="fila-2">
+            <div class="campo">
+              <label for="dui">DUI</label>
+              <input type="text" id="dui" inputmode="numeric" placeholder="00000000-0" maxlength="10" required>
+              <div class="msg">Formato: 00000000-0</div>
+            </div>
+            <div class="campo">
+              <label for="depto">Departamento</label>
+              <select id="depto" required>
+                <option value="">Selecciona…</option>
+                <option>San Salvador</option><option>San Miguel</option><option>Santa Ana</option>
+                <option>La Libertad</option><option>Usulután</option><option>Sonsonate</option>
+                <option>La Unión</option><option>La Paz</option><option>Chalatenango</option>
+                <option>Cuscatlán</option><option>Ahuachapán</option><option>Morazán</option>
+                <option>San Vicente</option><option>Cabañas</option>
+              </select>
+              <div class="msg">Selecciona tu departamento.</div>
+            </div>
+          </div>
+          <p class="form-aviso" id="cuentaMsg" role="status" aria-live="polite"></p>
+          <p class="cuenta-ayuda">¿Ya tienes cuenta? <a href="cuenta.html">Inicia sesión aquí</a>.</p>
+        </div>
+
+        <label class="casilla"><input type="checkbox" id="terminos" required> <span>Acepto los términos y condiciones y la política de privacidad de CréditoYa.</span></label>
 
         <div class="metodos" role="tablist">
           <button type="button" class="metodo activo" data-metodo="tarjeta" role="tab"><span>💳</span>Tarjeta</button>
@@ -64,11 +114,6 @@
           </div>
 
           <div class="campo">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
-            <div class="msg">Ingresa un correo válido.</div>
-          </div>
-          <div class="campo">
             <label for="numero">Número de tarjeta</label>
             <div class="con-icono">
               <input type="text" id="numero" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number" maxlength="23" required>
@@ -93,50 +138,30 @@
               <div class="msg">CVV inválido.</div>
             </div>
           </div>
-          <div class="fila-2">
-            <div class="campo">
-              <label for="dui">DUI</label>
-              <input type="text" id="dui" inputmode="numeric" placeholder="00000000-0" maxlength="10" required>
-              <div class="msg">Formato: 00000000-0</div>
-            </div>
-            <div class="campo">
-              <label for="depto">Departamento</label>
-              <select id="depto" required>
-                <option value="">Selecciona…</option>
-                <option>San Salvador</option><option>San Miguel</option><option>Santa Ana</option>
-                <option>La Libertad</option><option>Usulután</option><option>Sonsonate</option>
-                <option>La Unión</option><option>La Paz</option><option>Chalatenango</option>
-                <option>Cuscatlán</option><option>Ahuachapán</option><option>Morazán</option>
-                <option>San Vicente</option><option>Cabañas</option>
-              </select>
-              <div class="msg">Selecciona tu departamento.</div>
-            </div>
-          </div>
-          <label class="casilla"><input type="checkbox" id="terminos" required> <span>Acepto los términos y condiciones y la política de privacidad de CréditoYa.</span></label>
-          <button type="submit" class="btn btn-naranja btn-pagar" id="btnPagar">🔒 Pagar <span id="btnMonto">$5.64</span></button>
+          <button type="submit" class="btn btn-naranja btn-pagar" id="btnPagar">Confirmar pago de prueba <span id="btnMonto">$5.64</span></button>
         </form>
 
         <!-- Transfer365 -->
         <div id="panelTransfer" class="alt-pago oculto">
           <div class="grande-ico">⚡</div>
           <h3>Paga con Transfer365</h3>
-          <p>Desde la app de tu banco, transfiere el monto exacto a:</p>
+          <p>Simulación académica: no realices una transferencia bancaria. Referencia ilustrativa:</p>
           <div class="datos-banco">
             <div><span>Beneficiario</span><b>CréditoYa S.A. de C.V.</b></div>
             <div><span>Cuenta</span><b>0000-0000-0000</b></div>
             <div><span>Concepto</span><b id="conceptoRef">IMPULSO-000000</b></div>
             <div><span>Monto</span><b class="montoAlt">$5.64</b></div>
           </div>
-          <button type="button" class="btn btn-naranja btn-pagar" data-confirmar>Ya realicé la transferencia</button>
+          <button type="button" class="btn btn-naranja btn-pagar" data-confirmar>Simular transferencia</button>
         </div>
 
         <!-- PayPal -->
         <div id="panelPaypal" class="alt-pago oculto">
           <div class="grande-ico">🅿️</div>
           <h3>Paga con PayPal</h3>
-          <p>Serás redirigido a PayPal para completar el pago de <b class="montoAlt">$5.64</b> de forma segura.</p>
+          <p>Esta opción no se conecta a PayPal. Solo simula un pago de <b class="montoAlt">$5.64</b>.</p>
           <br>
-          <button type="button" class="btn btn-morado btn-pagar" data-confirmar>Continuar con PayPal</button>
+          <button type="button" class="btn btn-morado btn-pagar" data-confirmar>Simular pago con PayPal</button>
         </div>
       </div>
 
@@ -174,10 +199,10 @@
         </div>
 
         <div class="sellos">
-          <div class="sello-c"><b>🔒</b>Cifrado SSL 256-bit</div>
-          <div class="sello-c"><b>🛡️</b>Cumple PCI DSS</div>
-          <div class="sello-c"><b>✔️</b>Verificación 3-D Secure</div>
-          <div class="sello-c"><b>🏦</b>Red Transfer365</div>
+          <div class="sello-c"><b>🧪</b>Entorno de prueba</div>
+          <div class="sello-c"><b>🚫</b>Sin cobros reales</div>
+          <div class="sello-c"><b>🔐</b>Datos de tarjeta no guardados</div>
+          <div class="sello-c"><b>⚡</b>Transfer365 simulada</div>
         </div>
       </aside>
     </div>
@@ -189,13 +214,14 @@
   <div class="modal oculto" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
     <div class="modal-caja">
       <div class="ok">✓</div>
-      <h2 id="modalTitulo">¡Bienvenido a CréditoYa!</h2>
-      <p>Tu Plan Impulso está activo. Te enviamos la confirmación a tu correo y ya puedes solicitar tu primer crédito.</p>
+      <h2 id="modalTitulo">¡Tu cuenta está lista!</h2>
+      <p>El pago de demostración quedó registrado y tu Plan Impulso está activo. La confirmación ya está en las notificaciones de tu cuenta. No se envió un correo real.</p>
       <div class="ref">Referencia: <b id="refPago">CY-000000</b></div>
-      <a href="index.html" class="btn btn-naranja">Volver al inicio</a>
+      <a href="cuenta.html" class="btn btn-naranja">Ir a mi cuenta</a>
     </div>
   </div>
 
+  <script src="js/store.js"></script>
   <script src="js/pago.js"></script>
 </body>
 </html>
